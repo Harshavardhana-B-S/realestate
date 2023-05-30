@@ -2,11 +2,12 @@ import React from "react";
 import { useLocation,useNavigate } from "react-router";
 function Header() {
   const location = useLocation();
-  const navigate=useNavigate();
+  const navigate= useNavigate();
   // console.log(location.pathname);
 
   function pathMathRoute(route) {
-    if (route === location.pathname) return true;
+    if (route === location.pathname) 
+    return true;
   }
   return (
     <div className="bg-white border-b shadow-sm sticky top-0 z-50">
