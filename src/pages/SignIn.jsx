@@ -66,6 +66,21 @@ function SignIn() {
               
               }
             </div>
+
+            <div className="flex justify-between text-lg">
+              <div>
+              Don't have an account?<span ><a href="" >Register</a></span>
+              </div>
+
+              <div>
+                Forgot Password
+              </div>
+            </div>
+
+            <button className="bg-blue-600 text-white w-full px-4 py-2 mt-5">SIGN IN</button>
+
+            
+            <button className="bg-red-600 text-white w-full px-4 py-2 mt-5">CONTINUE WITH GOOGLE</button>
           </form>
         </div>
       </div>
