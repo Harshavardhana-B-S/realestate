@@ -1,29 +1,22 @@
 import { useState } from "react";
-import {AiFillEyeInvisible,AiFillEye} from"react-icons/ai"
 import { Link } from 'react-router-dom';
 import OAuth from "../components/OAuth";
 
 
-function SignIn() {
-  const [showPassword, setShowPassword] = useState(false);
+function ForgotPassword() {
+  
 
-  const [formData, SetFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, SetEmail] = useState("")
 
-  const { email, password } = formData;
+
 
   function onChange(e) {
-    SetFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
+    SetEmail(e.target.value)
   }
 
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold">Forgot Password</h1>
 
       <div className="flex flex-wrap justify-center items-center mt-10 px-6 py-12 max-w-6xl mx-auto">
 
@@ -47,28 +40,7 @@ function SignIn() {
           rounded transition ease-in-out mb-5"
             />
 
-            <div className="relative mb-6">
-              <input
-                type={showPassword?"text":"password"}
-                id="password"
-                onChange={onChange}
-                value={password}
-                className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300
-            rounded transition ease-in-out"
-            placeholder="password"
-              />
-
-              {showPassword ?(<AiFillEyeInvisible 
-              className="absolute right-3 top-3 text-xl cursor-pointer"
-              onClick={()=>setShowPassword((prevState)=>!prevState)}
-              />):
-
-              (<AiFillEye className="absolute right-3 top-3 text-xl cursor-pointer" 
-              onClick={()=>setShowPassword((prevState)=>!prevState)}
-              />)
-              
-              }
-            </div>
+            
 
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
               <p>
@@ -77,13 +49,13 @@ function SignIn() {
               </p>
 
               <p>
-                <Link to="/forgot-password" className="text-blue-500 hover:text-blue-600 transition duration-200 ease-in-out ">Forgot Password</Link>
+                <Link to="/sign-in" className="text-blue-500 hover:text-blue-600 transition duration-200 ease-in-out ">Sign in instead</Link>
               </p>
             </div>
 
             <button type="submit" className="bg-blue-600 text-white w-full px-7 py-3 text-sm font-medium mt-5
             uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
-            >Sign In</button>
+            >Send Reset Email</button>
 
             <div className="flex my-4 items-center before:border-t before:flex-1  
             before:border-gray-300 
@@ -102,4 +74,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default ForgotPassword;

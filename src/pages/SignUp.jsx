@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom';
 import OAuth from "../components/OAuth";
 
 
-function SignIn() {
+function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   const [formData, SetFormData] = useState({
+    name:"",
     email: "",
     password: "",
   });
 
-  const { email, password } = formData;
+  const { name,email, password } = formData;
 
   function onChange(e) {
     SetFormData((prevState) => ({
@@ -23,7 +24,7 @@ function SignIn() {
 
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold">Sign In</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
 
       <div className="flex flex-wrap justify-center items-center mt-10 px-6 py-12 max-w-6xl mx-auto">
 
@@ -37,6 +38,17 @@ function SignIn() {
 
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
           <form className="">
+
+          <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={onChange}
+              placeholder="Full Name"
+              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300
+          rounded transition ease-in-out mb-5"
+            />
+
             <input
               type="email"
               id="email"
@@ -72,8 +84,8 @@ function SignIn() {
 
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg">
               <p>
-                Don't have an account?
-                <Link to="/sign-up" className="text-red-500 hover:text-red-600 transition duration-200 ease-in-out ml-2">Register</Link>
+               Have an account?
+                <Link to="/sign-in" className="text-red-500 hover:text-red-600 transition duration-200 ease-in-out ml-2">Sign In</Link>
               </p>
 
               <p>
@@ -102,4 +114,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
