@@ -1,7 +1,13 @@
 import { useState } from "react";
 import {AiFillEyeInvisible,AiFillEye} from"react-icons/ai"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from "../components/OAuth";
+import { getAuth,createUserWithEmailAndPassword,updateProfile} from "firebase/auth";
+import {db} from "../firebase"
+import { serverTimestamp } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
+
+
 
 
 function SignUp() {
@@ -14,12 +20,42 @@ function SignUp() {
   });
 
   const { name,email, password } = formData;
+  const navigate =useNavigate()
+
 
   function onChange(e) {
     SetFormData((prevState) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+  }
+
+  async function onSubmit(e){
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredentials=await createUserWithEmailAndPassword(auth,email,password)
+      const user=userCredentials.user
+      updateProfile(auth.currentUser,{
+        displayName:name
+      })
+
+      const formCopy={...formData}
+      delete formCopy.password
+      formCopy.timestamp=serverTimestamp()
+
+      await setDoc(doc(db,"users",user.uid),
+      formCopy)
+
+      navigate("/")
+
+
+      console.log(user)
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   return (
@@ -37,7 +73,7 @@ function SignUp() {
         </div>
 
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form className="">
+          <form onSubmit={onSubmit}>
 
           <input
               type="text"
@@ -95,7 +131,7 @@ function SignUp() {
 
             <button type="submit" className="bg-blue-600 text-white w-full px-7 py-3 text-sm font-medium mt-5
             uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
-            >Sign In</button>
+            >Sign Up</button>
 
             <div className="flex my-4 items-center before:border-t before:flex-1  
             before:border-gray-300 
